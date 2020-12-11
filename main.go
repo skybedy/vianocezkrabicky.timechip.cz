@@ -8,6 +8,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"vianocezkrabicky.timechip.cz/models"
 	"vianocezkrabicky.timechip.cz/routes"
 	"vianocezkrabicky.timechip.cz/utils"
 )
@@ -40,9 +41,11 @@ func main() {
 		port = Port
 	}
 
+	models.VypisRoku("Z")
+
 	server := &http.Server{
 		Handler: router,
-		Addr:    "127.0.0.1:" + port,
+		Addr:    "0.0.0.0:" + port,
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
