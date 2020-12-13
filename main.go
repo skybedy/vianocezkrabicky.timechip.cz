@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -8,18 +9,24 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
-	"vianocezkrabicky.timechip.cz/models"
 	"vianocezkrabicky.timechip.cz/routes"
 	"vianocezkrabicky.timechip.cz/utils"
 )
 
 const Port = "1302"
 
+func Test(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r.FormValue("firstname"))
+	fmt.Fprint(w, r.FormValue("firstname"))
+	utils.SendingEmail(r.FormValue("email"))
+}
+
 func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", routes.Index).Methods("GET")
 	router.HandleFunc("/api/vypis-roku/{pohlavi}", routes.VypisRoku).Methods("GET")
+	router.HandleFunc("/api/test", Test).Methods("POST")
 
 	staticFileDirectory := http.Dir("./static/")
 	// Declare the handler, that routes requests to their respective filename.
@@ -41,7 +48,8 @@ func main() {
 		port = Port
 	}
 
-	models.VypisRoku("Z")
+	//models.VypisRoku("Z")
+	//utils.SendingEmail()
 
 	server := &http.Server{
 		Handler: router,
