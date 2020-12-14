@@ -28,9 +28,10 @@ func main() {
 	router.HandleFunc("/api/vypis-roku/{pohlavi}", routes.VypisRoku).Methods("GET")
 	router.HandleFunc("/api/test", Test).Methods("POST")
 
-	path := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
+	//pathTemplates := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
+	path := ""
 
-	staticFileDirectory := http.Dir(path + "static/")
+	staticFileDirectory := http.Dir("./static/")
 	// Declare the handler, that routes requests to their respective filename.
 	// The fileserver is wrapped in the `stripPrefix` method, because we want to
 	// remove the "/assets/" prefix when looking for files.
@@ -38,10 +39,10 @@ func main() {
 	// will look for only "index.html" inside the directory declared above.
 	// If we did not strip the prefix, the file server would look for
 	// "./assets/assets/index.html", and yield an error
-	staticFileHandler := http.StripPrefix(path+"static/", http.FileServer(staticFileDirectory))
+	staticFileHandler := http.StripPrefix("/static/", http.FileServer(staticFileDirectory))
 	// The "PathPrefix" method acts as a matcher, and matches all routes starting
 	// with "/assets/", instead of the absolute route itself
-	router.PathPrefix(path + "static/").Handler(staticFileHandler).Methods("GET")
+	router.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
 	utils.LoadTemplates(path + "templates/*.html")
 
