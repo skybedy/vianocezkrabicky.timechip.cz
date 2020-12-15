@@ -28,8 +28,7 @@ func main() {
 	router.HandleFunc("/api/vypis-roku/{pohlavi}", routes.VypisRoku).Methods("GET")
 	router.HandleFunc("/api/test", Test).Methods("POST")
 
-	//pathTemplates := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
-	path := ""
+	path := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
 
 	staticFileDirectory := http.Dir("./static/")
 	// Declare the handler, that routes requests to their respective filename.
