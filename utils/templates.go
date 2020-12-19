@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -14,8 +13,4 @@ func LoadTemplates(pattern string) {
 
 func ExecuteTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
 	templates.ExecuteTemplate(w, tmpl, data)
-}
-
-func BlaBla() {
-	fmt.Println("ahoj")
 }

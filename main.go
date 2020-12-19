@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -15,20 +14,15 @@ import (
 
 const Port = "1302"
 
-func Test(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.FormValue("firstname"))
-	fmt.Fprint(w, r.FormValue("firstname"))
-	utils.SendingEmail(r.FormValue("email"))
-}
-
 func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", routes.Index).Methods("GET")
 	router.HandleFunc("/api/vypis-roku/{pohlavi}", routes.VypisRoku).Methods("GET")
-	router.HandleFunc("/api/test", Test).Methods("POST")
+	router.HandleFunc("/export", routes.Export).Methods("GET")
+	router.HandleFunc("/api/insert-to-db", routes.InsertToDB).Methods("POST")
 
-	path := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
+	//path := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
 
 	staticFileDirectory := http.Dir("./static/")
 	// Declare the handler, that routes requests to their respective filename.
@@ -43,7 +37,7 @@ func main() {
 	// with "/assets/", instead of the absolute route itself
 	router.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
-	utils.LoadTemplates(path + "templates/*.html")
+	utils.LoadTemplates("templates/*.html")
 
 	port, ok := os.LookupEnv("PORT")
 	if !ok {

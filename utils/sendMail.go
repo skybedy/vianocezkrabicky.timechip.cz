@@ -19,8 +19,6 @@ func SendingEmail(recipient string) {
 		fmt.Println(err)
 		panic(err)
 	}
-
 	fmt.Println("mail poslan")
-
 	return
 }

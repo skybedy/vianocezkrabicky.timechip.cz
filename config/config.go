@@ -12,3 +12,5 @@ const MailFrom = "visalajka@seznam.cz"
 const MailFromName = "timechip.cz"
 const MailSubject = "Posílání dárků"
 const MailContent = "Příliš žluťoučký kůň úpěl ďábelské ódy."
+
+const OdesilaniMailu = false
