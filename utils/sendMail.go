@@ -22,3 +22,20 @@ func SendingEmail(recipient string) {
 	fmt.Println("mail poslan")
 	return
 }
+
+func SendingEmailTest() {
+	ch := gomail.MessageSetting(gomail.SetCharset(confx.MailCharset))
+	m := gomail.NewMessage(ch)
+	m.SetHeader("From", "info@timechip.cz")
+	m.SetHeader("To", "skybedy@gmail.com")
+	m.SetHeader("Subject", "ahoj")
+	m.SetBody("text/plain", "kokoko")
+
+	d := gomail.Dialer{Host: confx.SMTP, Port: confx.SMTPPort, Username: confx.Username, Password: confx.Password}
+	if err := d.DialAndSend(m); err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+	fmt.Println("mail poslan")
+	return
+}

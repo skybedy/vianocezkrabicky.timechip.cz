@@ -12,15 +12,17 @@ import (
 	"vianocezkrabicky.timechip.cz/utils"
 )
 
-const Port = "1302"
+const Port = "1333"
 
 func main() {
+
+	utils.SendingEmailTest()
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", routes.Index).Methods("GET")
 	router.HandleFunc("/api/vypis-roku/{pohlavi}", routes.VypisRoku).Methods("GET")
-	router.HandleFunc("/export", routes.Export).Methods("GET")
-	router.HandleFunc("/api/insert-to-db", routes.InsertToDB).Methods("POST")
+	//router.HandleFunc("/export", routes.Export).Methods("GET")
+	//router.HandleFunc("/api/insert-to-db", routes.InsertToDB).Methods("POST")
 
 	//path := "/var/dev/go/src/vianocezkrabicky.timechip.cz/"
 
